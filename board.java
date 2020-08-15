@@ -3,19 +3,14 @@ package gamemap;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -27,8 +22,8 @@ public class board extends JPanel implements ActionListener {
     private final Color dotColor = new Color(192, 192, 0);
     private Color mazeColor;
 
-    private boolean inGame = false;
-
+    private Image ii;
+    private int score;
     private final int BLOCK_SIZE = 24;
     private final int N_BLOCKS = 15;
     private final int SCREEN_SIZE = N_BLOCKS * BLOCK_SIZE;
@@ -55,10 +50,6 @@ public class board extends JPanel implements ActionListener {
         25, 26, 26, 26, 26, 24, 24, 26, 24, 24, 26, 26, 26, 26, 28
     };
 
-    private final int validSpeeds[] = {1, 2, 3, 4, 6, 8};
-    private final int maxSpeed = 6;
-
-    private int currentSpeed = 3;
     private short[] screenData;
     private Timer timer;
 
@@ -94,22 +85,6 @@ public class board extends JPanel implements ActionListener {
         initGame();
     }
 
-    private void showIntroScreen(Graphics2D g2d) {
-
-        g2d.setColor(new Color(0, 32, 48));
-        g2d.fillRect(50, SCREEN_SIZE / 2 - 30, SCREEN_SIZE - 100, 50);
-        g2d.setColor(Color.white);
-        g2d.drawRect(50, SCREEN_SIZE / 2 - 30, SCREEN_SIZE - 100, 50);
-
-        String s = "Press s to start.";
-        Font small = new Font("Helvetica", Font.BOLD, 14);
-        FontMetrics metr = this.getFontMetrics(small);
-
-        g2d.setColor(Color.white);
-        g2d.setFont(small);
-        g2d.drawString(s, (SCREEN_SIZE - metr.stringWidth(s)) / 2, SCREEN_SIZE / 2);
-    }
-
     private void drawScore(Graphics2D g) {
 
         int i;
@@ -119,10 +94,6 @@ public class board extends JPanel implements ActionListener {
         g.setColor(new Color(96, 128, 255));
         s = "Score: " + score;
         g.drawString(s, SCREEN_SIZE / 2 + 96, SCREEN_SIZE + 16);
-
-        for (i = 0; i < pacsLeft; i++) {
-            g.drawImage(pacman3left, i * 28 + 8, SCREEN_SIZE + 1, this);
-        }
     }
 
     private void checkMaze() {
@@ -142,14 +113,6 @@ public class board extends JPanel implements ActionListener {
         if (finished) {
 
             score += 50;
-
-            if (N_GHOSTS < MAX_GHOSTS) {
-                N_GHOSTS++;
-            }
-
-            if (currentSpeed < maxSpeed) {
-                currentSpeed++;
-            }
 
             initLevel();
         }
@@ -198,7 +161,6 @@ public class board extends JPanel implements ActionListener {
 
         score = 0;
         initLevel();
-        currentSpeed = 3;
     }
 
     private void initLevel() {
@@ -225,24 +187,14 @@ public class board extends JPanel implements ActionListener {
 
         drawMaze(g2d);
         drawScore(g2d);
-        doAnim();
-
-        if (inGame) {
-            playGame(g2d);
-        } else {
-            showIntroScreen(g2d);
-        }
 
         g2d.drawImage(ii, 5, 5, this);
         Toolkit.getDefaultToolkit().sync();
         g2d.dispose();
     }
-        }
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        repaint();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
