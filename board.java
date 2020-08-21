@@ -65,7 +65,7 @@ public class board extends JPanel implements ActionListener {
     private void initVariables() {
 
         screenData = new short[N_BLOCKS * N_BLOCKS];
-        mazeColor = new Color(5, 100, 5);
+        mazeColor = new Color(0, 0, 255);
         d = new Dimension(400, 400);
         
         timer = new Timer(40, this);
@@ -84,11 +84,10 @@ public class board extends JPanel implements ActionListener {
         String s;
 
         g.setFont(smallFont);
-        g.setColor(new Color(96, 128, 255));
+        g.setColor(new Color(50, 205, 50));
         s = "Score: " + score;
         g.drawString(s, SCREEN_SIZE / 2 + 96, SCREEN_SIZE + 16);
     }
-
   
     private void drawMaze(Graphics2D g2d) {
 
