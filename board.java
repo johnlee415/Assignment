@@ -28,10 +28,6 @@ public class board extends JPanel implements ActionListener {
     private final int N_BLOCKS = 15;
     private final int SCREEN_SIZE = N_BLOCKS * BLOCK_SIZE;
 
-    private int[] dx, dy;
-
-    private int req_dx, req_dy, view_dx, view_dy;
-
     private final short levelData[] = {
         19, 26, 18, 26, 18, 18, 18, 26, 18, 18, 26, 26, 26, 26, 22,
         21, 0, 21, 0, 17, 16, 20, 0, 17, 20, 0, 0, 0, 0, 21,
@@ -71,8 +67,6 @@ public class board extends JPanel implements ActionListener {
         screenData = new short[N_BLOCKS * N_BLOCKS];
         mazeColor = new Color(5, 100, 5);
         d = new Dimension(400, 400);
-        dx = new int[4];
-        dy = new int[4];
         
         timer = new Timer(40, this);
         timer.start();
@@ -87,7 +81,6 @@ public class board extends JPanel implements ActionListener {
 
     private void drawScore(Graphics2D g) {
 
-        int i;
         String s;
 
         g.setFont(smallFont);
@@ -96,27 +89,6 @@ public class board extends JPanel implements ActionListener {
         g.drawString(s, SCREEN_SIZE / 2 + 96, SCREEN_SIZE + 16);
     }
 
-    private void checkMaze() {
-
-        short i = 0;
-        boolean finished = true;
-
-        while (i < N_BLOCKS * N_BLOCKS && finished) {
-
-            if ((screenData[i] & 48) != 0) {
-                finished = false;
-            }
-
-            i++;
-        }
-
-        if (finished) {
-
-            score += 50;
-
-            initLevel();
-        }
-    }
   
     private void drawMaze(Graphics2D g2d) {
 
