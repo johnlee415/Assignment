@@ -1,3 +1,7 @@
+/*   Title : Zetcode Java Pacman
+     Referrence : http://zetcode.com/javagames/pacman/
+*/
+
 package client;
 import ADT.ArrayQueuePacman;
 import ADT.LinkedListPacman;
@@ -25,21 +29,14 @@ public class tBoard extends JPanel implements ActionListener{
     private boolean levelEnd = false;
     
     private boolean inGame = true;
-    private final int MAX_GHOSTS = 8;
-    private int N_GHOSTS = 2;
     private int[] dx, dy;
     private int ghostSpeeds = 1;
      private int ghost_dx, ghost_dy;
-    private int ghost_dx2,ghost_dy2;
-    private int[] ghost_x, ghost_y;
-    private Image ghost;
-    private int currentSpeed = 1;
     private int[] storeGhosts1;
+
     
-    public int widthOfScene = 510;
-    
-    Enemy g = new Enemy(3,7,"C:\\Users\\user\\Downloads\\PacmanGame (5) (2)\\PacmanGame (5)\\PacmanGame\\src\\image\\ghost(right).jpg",true);
-    Enemy g1 = new Enemy(5,8,"C:\\Users\\user\\Downloads\\PacmanGame (5) (2)\\PacmanGame (5)\\PacmanGame\\src\\image\\ghost(right).jpg",true);
+    Enemy g = new Enemy(3,7,"C:\\Users\\ACER\\Desktop\\PacmanGame (5)\\PacmanGame\\src\\image\\ghost(right).jpg");
+    Enemy g1 = new Enemy(5,8,"C:\\Users\\ACER\\Desktop\\PacmanGame (5)\\PacmanGame\\src\\image\\ghost(right).jpg");
 
     private final short levelData[] = {
         19, 26, 18, 26, 18, 18, 18, 26, 18, 18, 26, 26, 26, 26, 22,
@@ -80,11 +77,11 @@ public class tBoard extends JPanel implements ActionListener{
     private short[] screenData;
     
     
-    private ImageIcon pacmanUp = new ImageIcon("C:\\Users\\user\\Downloads\\PacmanGame (5) (1)\\PacmanGame\\src\\image\\up.png");
-    private ImageIcon pacmanDown = new ImageIcon("C:\\Users\\user\\Downloads\\PacmanGame (5) (1)\\PacmanGame\\src\\image\\down.png");
-    private ImageIcon pacmanRight = new ImageIcon("C:\\Users\\user\\Downloads\\PacmanGame (5) (1)\\PacmanGame\\src\\image\\right.png");
-    private ImageIcon pacmanLeft = new ImageIcon("C:\\Users\\user\\Downloads\\PacmanGame (5) (1)\\PacmanGame\\src\\image\\left.png");
-    private ImageIcon ghostImg= new ImageIcon("C:\\Users\\user\\Downloads\\PacmanGame (5) (2)\\PacmanGame (5)\\PacmanGame\\src\\image\\ghost(right).jpg");
+    private ImageIcon pacmanUp = new ImageIcon("C:\\Users\\ACER\\Desktop\\PacmanGame (5)\\PacmanGame\\src\\image\\up.png");
+    private ImageIcon pacmanDown = new ImageIcon("C:\\Users\\ACER\\Desktop\\PacmanGame (5)\\PacmanGame\\src\\image\\down.png");
+    private ImageIcon pacmanRight = new ImageIcon("C:\\Users\\ACER\\Desktop\\PacmanGame (5)\\PacmanGame\\src\\image\\right.png");
+    private ImageIcon pacmanLeft = new ImageIcon("C:\\Users\\ACER\\Desktop\\PacmanGame (5)\\PacmanGame\\src\\image\\left.png");
+    private ImageIcon ghostImg= new ImageIcon("C:\\Users\\ACER\\Desktop\\PacmanGame (5)\\PacmanGame\\src\\image\\ghost(right).jpg");
     private int pacman_x = 0 * BLOCK_SIZE;
     private int pacman_y = 0 * BLOCK_SIZE;
     private int pacmand_x, pacmand_y;
@@ -92,11 +89,9 @@ public class tBoard extends JPanel implements ActionListener{
     private final int speed = 6;
 
     LinkedListPacman dotList = new LinkedListPacman();
-    
-    
+        
     ArrayQueuePacman<Player> pacman = new ArrayQueuePacman<Player>();
-    
-    
+   
     LinkedQueueMap<Map> map = new LinkedQueueMap<Map>();
     
     ArrayStack<Enemy> stack = new ArrayStack<Enemy>();
@@ -122,7 +117,7 @@ public class tBoard extends JPanel implements ActionListener{
         
         for ( int i = 0; i < pacman.getLength(); i ++ )
         {
-            pacman.enqueue(new Player( pacman_x, pacman_y, "C:\\Users\\user\\Downloads\\PacmanGame (5) (1)\\PacmanGame\\src\\image\\right.png", true, speed));
+            pacman.enqueue(new Player( pacman_x, pacman_y, "C:\\Users\\ACER\\Desktop\\PacmanGame (5)\\PacmanGame\\src\\image\\right.png", true, speed));
         }
         
         for (int i = 0; i < levelData.length; i++)
@@ -135,11 +130,8 @@ public class tBoard extends JPanel implements ActionListener{
         mazeColor = new Color(0, 0, 225); 
         d = new Dimension(400, 400);
         
-        ghost_x = new int[MAX_GHOSTS];
         ghost_dx = 8;
-        ghost_y = new int[MAX_GHOSTS];
         ghost_dy = 8;
-        ghostSpeeds = 1;
         dx = new int[4];
         dy = new int[4];
         stack.push(g);
@@ -219,21 +211,15 @@ public class tBoard extends JPanel implements ActionListener{
     }
 
     public void initGame() {
-        int dx = 1;
+        
        
          g.setxAxis(7 * BLOCK_SIZE);
             g.setyAxis(1 * BLOCK_SIZE);
             g1.setxAxis(11 * BLOCK_SIZE);
             g1.setyAxis(3 * BLOCK_SIZE);
-             ghost_dy = 0;
-            ghost_dx = dx;
-            ghost_dy2 = 0;
-            ghost_dx2 = dx;
-            dx = -dx;
+             
             ghostSpeeds = 1;
         
-        N_GHOSTS = 2;
-        currentSpeed = 1;
         
         
         for (int i = 0; i < N_BLOCKS * N_BLOCKS; i++) {
@@ -284,7 +270,7 @@ public class tBoard extends JPanel implements ActionListener{
         doDrawing(g);
     }
 
-    public void doDrawing(Graphics g) {
+   public void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
 
@@ -483,7 +469,7 @@ public class tBoard extends JPanel implements ActionListener{
 
           
             stack.peek().setxAxis(storeGhosts1[0]  + (ghost_dx * ghostSpeeds));
-          stack.peek().setyAxis(storeGhosts1[1]  + (ghost_dy * ghostSpeeds));
+            stack.peek().setyAxis(storeGhosts1[1]  + (ghost_dy * ghostSpeeds));
             
             
             drawGhost(g2d, storeGhosts1[0] + 1, storeGhosts1[1] + 1);
@@ -502,7 +488,7 @@ public class tBoard extends JPanel implements ActionListener{
                 }
             }
             
-            
+            stack.pop();
             
             
            /* storeGhosts1[2] = stack.peek().getxAxis();
