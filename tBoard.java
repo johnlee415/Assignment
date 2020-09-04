@@ -1,4 +1,5 @@
 /*   Title : Zetcode Java Pacman
+     Credit     : Jan Bodnar
      Referrence : http://zetcode.com/javagames/pacman/
 */
 
